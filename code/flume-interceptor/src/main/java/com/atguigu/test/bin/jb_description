@@ -1,0 +1,9 @@
+gj.sh  三台机器关机 4->2逐个关机
+xsync  分发脚本（数据同步脚本） （分发到各个节点--即同步数据）
+lg.sh  集群日志生成脚本
+mycluster  hadoop集群启动脚本
+kfcuster  kafka集群启动脚本
+jpsall  查看进程脚本
+zkcluster  zookeeper集群启动脚本
+f1.sh  日志采集Flume启动停止脚本
+f2.sh  日志消费Flume启动停止脚本

@@ -1,0 +1,4 @@
+com\atguigu\flume\demo\interceptor\CustomInterceptor.class
+com\atguigu\flume\demo\sink\CustomSink.class
+com\atguigu\flume\demo\interceptor\CustomInterceptor$Builder.class
+com\atguigu\flume\demo\source\CustomSource.class

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    namespace:类似类的包名，不能随便写，必须要对应的接口的全类名一致
+
+
+-->
+<mapper namespace="org.atguigu.gmall_publisher.mappers.GMVMapper">
+
+    <!--
+            如果返回值是java的基本数据类型及包装类，mybatis提供了简写的别名
+                    int ===>  Integer的全类名
+
+    -->
+        <select id="getGMVByDate" resultType="double">
+
+            select
+                sum(gmv)
+            from gmvstats
+            where create_date  = #{daffeaf}
+
+
+        </select>
+
+
+
+
+    <select id="getGMVDatasPerHour" resultType="org.atguigu.gmall_publisher.bean.GMVDataPerHour">
+
+            select
+                create_hour hour,
+                gmv
+            from gmvstats
+            where create_date  = #{daffeaf}
+
+    </select>
+</mapper>

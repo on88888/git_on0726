@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    <!--
+        要连接的数据库的环境
+    -->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <!--
+                数据的源头，配置数据所在的库名，url，驱动，用户名和密码
+            -->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://hadoop104:3306/gmall0726?useSSL=false"/>
+                <property name="username" value="root"/>
+                <property name="password" value="000000"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--
+        map:映射
+        mapper: 映射器。编写sql的那些xml文件！
+            mybatis推崇的编程方式：
+                    sql编写在xml文件中
+                    java代码写在.java文件中
+
+                java程序在运行时，自动到xml中找sql!
+              编写sql的xml文件，称为 sql的mapper文件
+       -->
+    <mappers>
+        <mapper resource="sql.xml"/>
+       <mapper resource="EmployeeMapper.xml"/>
+    </mappers>
+    
+
+</configuration>

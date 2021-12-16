@@ -1,0 +1,33 @@
+#! /bin/bash
+#xsync ./java /opt/module/hadoop aa
+#1、判断参数是否传入
+#$#: 获取参数个数
+#$*: 获取所有参数,当所有参数当做一个整体
+#$@: 获取所有参数,将其中的参数当做一个个单独的个体
+#$?: 判断上一次程序执行是否成功
+if [ $# -lt 1 ]
+then
+	echo "必须传入最少一个文件/目录"
+	exit
+fi
+#2、遍历待分发的目录/文件
+for sFile in $@
+do
+	#3、判断当前待分发的目录/文件是否存在,如果存在则分发
+	#-e: 判断目录/文件是否存在
+	#-d: 判断是否为目录
+	#-f: 判断是否为文件
+	if [ -e $sFile ]
+	then
+		#4、获取当前待分发的目录/文件的父目录
+		fdir=$(cd $(dirname $sFile);pwd)
+		fname=$(basename $sFile)
+		for host in hadoop102 hadoop103 hadoop104
+		do
+			#5、在其他的服务器创建该目录
+			ssh $host "mkdir -p $fdir"
+			#6、分发文件/目录
+			rsync $fdir/$fname $host:$fdir
+		done
+	fi
+done

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/src/main/java/test/test.sql" dialect="HiveQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/test/列转行.sql" dialect="HiveQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/test/行转列.sql" dialect="HiveQL" />
+    <file url="PROJECT" dialect="HiveQL" />
+  </component>
+</project>

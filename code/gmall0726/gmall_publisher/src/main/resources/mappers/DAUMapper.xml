@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    namespace:类似类的包名，不能随便写，必须要对应的接口的全类名一致
+
+
+-->
+<mapper namespace="org.atguigu.gmall_publisher.mappers.DAUMapper">
+
+    <!--
+            如果返回值是java的基本数据类型及包装类，mybatis提供了简写的别名
+                    int ===>  Integer的全类名
+
+    -->
+        <select id="getDAUByDate" resultType="int">
+
+            select
+                count(*)
+            from gmall2021_startuplog
+            where logDate  = #{daffeaf}
+
+
+        </select>
+
+
+
+<!--
+        离线数仓中，有dim_user_info，可以通过create_time判断是不是今日新增的用户！
+
+        只有每个设备，在每一天的第一条启动日志，如何求当日新增的设备有多少？
+
+        求当日活跃的设备    差集    当日之前活跃的设备
+
+        < 在xml中，被认为是一个标签的开始！
+            < 需要转义 为  &lt;
+            > 需要转义 为  &gt;
+
+-->
+    <select id="getNewUserCountByDate" resultType="int">
+
+        select
+                count(*)
+        from
+            (
+                select
+                     mid
+                from gmall2021_startuplog
+                where logDate  = #{daffeaf}
+            ) t1
+            left  join
+             (
+                select
+                     mid
+                from gmall2021_startuplog
+                where logDate  &lt; #{daffeaf}
+                group by mid
+            ) t2
+        on t1.mid = t2.mid
+        where t2.mid is null
+
+
+
+        </select>
+
+    <select id="getDauDatasPerHour" resultType="org.atguigu.gmall_publisher.bean.DAUDataPerHour">
+
+            select
+                logHour hour,
+                count(*) count
+            from gmall2021_startuplog
+            where logDate  = #{daffeaf}
+            group by logHour
+
+    </select>
+</mapper>

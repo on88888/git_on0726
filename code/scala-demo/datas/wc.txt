@@ -1,0 +1,4 @@
+hello java hello spark
+spark hadoop hadoop flume
+flume kafka spark scala
+scala hadoop flume spark

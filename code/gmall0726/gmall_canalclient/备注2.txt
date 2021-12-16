@@ -1,0 +1,52 @@
+Message[
+  id=1,
+  entries=
+  [header {
+  version: 1
+  logfileName: "mysql-bin.000001"
+  logfileOffset: 1628
+  serverId: 1
+  serverenCode: "UTF-8"
+  executeTime: 1638348329000
+  sourceType: MYSQL
+  schemaName: "gmall0726"
+  tableName: "tbl_employee"
+  eventLength: 98
+  eventType: UPDATE
+  props {
+    key: "rowsCount"
+    value: "1"
+  }
+}
+entryType: ROWDATA
+storeValue: "\bm\020\002P\000b\274\002\n\032\b\000\020\004\032\002id \001(\0000\000B\0012R\aint(11)\n,\b\001\020\f\032\tlast_name \000(\0000\000B\atomJackR\fvarchar(255)\n%\b\002\020\f\032\006gender \000(\0000\000B\004maleR\vvarchar(10)\n-\b\003\020\f\032\005email \000(\0000\000B\fJack@163.comR\fvarchar(255)\022\032\b\000\020\004\032\002id \001(\0000\000B\0012R\aint(11)\022(\b\001\020\f\032\tlast_name \000(\0010\000B\003tomR\fvarchar(255)\022%\b\002\020\f\032\006gender \000(\0000\000B\004maleR\vvarchar(10)\022-\b\003\020\f\032\005email \000(\0000\000B\fJack@163.comR\fvarchar(255)"
+, header {
+  version: 1
+  logfileName: "mysql-bin.000001"
+  logfileOffset: 1726
+  serverId: 1
+  serverenCode: "UTF-8"
+  executeTime: 1638348329000
+  sourceType: MYSQL
+  schemaName: ""
+  tableName: ""
+  eventLength: 31
+}
+entryType: TRANSACTIONEND
+storeValue: "\022\00270"
+, header {
+  version: 1
+  logfileName: "mysql-bin.000001"
+  logfileOffset: 1822
+  serverId: 1
+  serverenCode: "UTF-8"
+  executeTime: 1638354317000
+  sourceType: MYSQL
+  eventLength: 239
+  eventType: QUERY
+}
+entryType: ROWDATA
+storeValue: "\020\aZ\240\001GRANT SELECT, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO \'canal\'@\'%\' IDENTIFIED WITH \'mysql_native_password\' AS \'*E3619321C1A937C46A0D8BD1DAC39F93B27D4458\'"
+],
+
+raw=false,rawEntries=[]]

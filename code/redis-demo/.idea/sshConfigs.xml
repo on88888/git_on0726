@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" connectionConfig="{&quot;serverAliveInterval&quot;:300}" host="hadoop102" id="643e508d-fef6-4c93-b8e7-b1918d5fd365" port="22" customName="hadoop102" nameFormat="CUSTOM">
+        <option name="customName" value="hadoop102" />
+      </sshConfig>
+    </configs>
+  </component>
+</project>

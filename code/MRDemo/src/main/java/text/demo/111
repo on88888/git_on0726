@@ -1,0 +1,8 @@
+
+    /*
+        用来指定按照哪个属性进行排序
+        按照总流量进行排序
+     */
+    public int compareTo(FlowBean o) {
+        return Long.comparethisd(this.somFlow,o.getsumFlow());
+    }

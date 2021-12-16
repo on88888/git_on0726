@@ -1,0 +1,172 @@
+一、Helloworld
+
+1.步骤
+    ①安装
+        在pom中引入依赖
+<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+<dependency>
+    <groupId>org.mybatis</groupId>
+    <artifactId>mybatis</artifactId>
+    <version>3.4.6</version>
+</dependency>
+
+        引入mysql的驱动
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.47</version>
+        </dependency>
+
+
+    ②准备数据
+        在mysql中建库，建表，准备示例数据
+
+
+    ③根据ORM映射的规则，准备Bean
+         tbl_employee ------------  Employee
+            id                      id
+            last_name               lastName
+            gender                  gender
+            email                   email
+
+    ④Lombok的使用
+            a) 到plugins中安装
+            b) 在项目下引入 注解的依赖
+            <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.12</version>
+                <scope>provided</scope>
+            </dependency>
+            c) 在类上标注注解
+
+    ⑤编写代码实现CRUD
+
+
+2.编写代码实现CRUD，以查询1号员工为例
+
+    ① 从 XML 中构建 SqlSessionFactory
+        什么是 SqlSessionFactory？
+            SqlSessionFactory 是一个工厂类，创建SqlSession对象！
+
+
+        什么是SqlSession？
+            sql的会话：  在java程序客户端和mysql服务端建立一次会话，之后客户端可以发送N次sql，服务器执行后将结果
+                        响应给java程序！
+
+                        类似 JDBC中的Connection,代表和mysql服务器的一次连接！
+
+            会话： 客户端和服务器建立起了回话，客户端可以发送N次请求到服务端，服务端处理之后，将结果响应给客户端
+
+
+        ----------
+            a) 准备xml，进行配置
+            b) 抄代码，改一改
+
+
+    ② 构建 SqlSession，代表和数据库的一次连接
+             SqlSession sqlSession = sqlSessionFactory.openSession();
+
+
+    ③ 写sql
+            sql.xml:  称为sql的mapper文件
+
+            告诉mysql，我有个sql.xml，这里面写了很多sql，请求运行程序时，来这里找sql！
+
+
+
+3.查询最后是如何封装数据的
+
+    语句：  select * from tbl_employee where id = 1
+
+    查询到的记录：
+             id=1    last_name=Tom        gender=male    eamil=Tom@163.com
+
+    将查询到的数据，封装为resultType="com.atguigu.mybatis.bean.Employee"的属性
+
+        public class Employee {
+
+            private Integer id;
+            private String lastName;
+            private String gender;
+            private String email;
+
+
+     规则：  将数据库查询的列名，添加set前缀，调用resultType的 setXxx()
+
+            Employee.setLast_name(Tom)
+            Employee.setId(1)
+            Employee.setGender(male)
+            Employee.setEamil(Tom@163.com)
+
+
+       Employee(id=1, lastName=null, gender=male, email=Tom@163.com)
+
+
+             Employee.setLastName(Tom)
+
+                数据库列名 ： lastName
+
+
+     解决方法：
+            方法一:为查询的列名  last_name起别名  lastName
+            方法二：  为Employee提供 public void setLast_name(String name)
+            方法三：  点拨下mybatis，把方法一，教给mybatis，让它照着操作
+                在配置的xml中添加:
+                <settings>
+                        <setting name="mapUnderscoreToCamelCase" value="true "/>
+                    </settings>
+
+
+
+4.HelloWorld的问题
+        ①调用的是SqlSession提供的方法，对入参没有类型检查
+                传入参数后，如果类型不匹配，在编译时检查不出来，运行时报错或无法达到期望的效果
+
+        ②返回值为Object，还需强转，麻烦
+
+        解决：  不用SqlSession提供的方法，用自己设计的方法来执行SQL
+
+                     Employee   getEmployeeById(Integer id)
+
+
+                接口式编程。设计一个接口类(Dao类，在mybatis又叫Mapper类)，提供CURD的方法，自己设计方法的入参和返回值！
+
+
+5.运行的原理
+
+        1)读取配置文件,创建sqlSessionFactory
+                ①检查环境的设置，尝试去连接数据库
+                ②检查<mapper>标签
+                        namespace： 对应的接口是否存在
+                        sql的id和resultType: 所对应的方法和返回值类型是否存在
+
+                报错：BindingException: Type interface com.atguigu.mybatis.mappers.EmployeeMapper
+                        is not known to the MapperRegistry.
+
+
+            interface com.atguigu.mybatis.mappers.EmployeeMapper 所需要的sql文件，没有写，或没有在mybatis的全局配置中注册，
+                或sql的mapper文件的namespace和接口的全类名不匹配！
+
+
+
+            报错： BindingException: Invalid bound statement (not found):
+            com.atguigu.mybatis.mappers.EmployeeMapper.insertEmployee
+
+            EmployeeMapper.insertEmployee 所需要的sql找不到！
+                    sql的mapper文件中没有提供，或提供了sql的id和方法名对不上
+
+        2) 使用sqlSessionFactory创建一个sqlSession
+                 SqlSession session = sqlSessionFactory.openSession(true);
+
+
+        3） 获取一个Dao对象
+                 Dao类 mapper = session.getMapper(Dao类.class);
+
+
+         4） 调用Dao中的方法CURD
+
+
+

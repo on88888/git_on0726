@@ -1,0 +1,18 @@
+server:
+  port: 8889
+
+#把config.xml 的environments标签中的内容集成
+spring:
+  datasource:
+    name: mydb
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://hadoop104:3306/gmall0726?useSSL=false
+    username: root
+    password: "000000"
+    driver-class-name: com.mysql.jdbc.Driver
+
+#把config.xml 的mappers标签中的内容集成
+mybatis:
+  mapper-locations: classpath*:/mappers/*Mapper.xml
+  configuration:
+    mapUnderscoreToCamelCase: true

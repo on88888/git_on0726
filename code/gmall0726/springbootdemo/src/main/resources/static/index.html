@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+        <!--
+
+            a :  超链接跳转标签，点击后，会向指定的地址跳转
+                        href: 要跳转的路径
+
+            br ： 换行
+
+            hr :  分割线
+
+            form: 表单，表格，单子
+                    属性名name  和属性值value
+
+                    action: 提交的url路径
+                    method: 请求方式
+
+                 input : 输入框，填空的地方
+                        type:类型
+                            密码框： password
+                            电话号码：  tel
+                            文本输入框(默认)： text
+                             提交按钮:  submit
+                             单选框：  radio
+
+                        属性名name  和属性值value
+        -->
+        <a href="/myapp/hello" >点击发送Hello请求</a>
+        <br/>
+        <a href="/myapp/hello1" >点击发送Hello1请求字面量数据</a>
+        <br/>
+        <a href="/myapp/hello2" >点击发送Hello1请求非字面量数据</a>
+    <hr/>
+
+        <a href="/myapp/sendData?name=jack&age=20" >点击发送GET请求</a>
+        <br/>
+       <form action="/myapp/sendData" method="post">
+            <input name="name" value="tom">
+            <input name="age" value="20">
+           <input value="提交按钮" type="submit">
+
+       </form>
+        <hr/>
+
+        <h1>员工增删改查</h1>
+        <form action="/myapp/emp" method="post">
+            <!-- 四个radio单选按钮，如果name一致，则是同一个组-->
+            <input name="op" value="insert" type="radio">增</input>
+            <input name="op" value="delete" type="radio">删</input>
+            <input name="op" value="update" type="radio">改</input>
+            <input name="op" value="select" type="radio">查</input>
+        <br/>
+            姓名:<input name="name" value="tom"><br/>
+            id： <input name="id" value="1"><br/>
+            性别:<input name="gender" value="male"><br/>
+            邮箱:<input name="email" value="tom@qq.com"><br/>
+
+            <input value="提交按钮" type="submit">
+
+        </form><br/>
+        <a href="/myapp/getAll" >查询所有员工</a>
+
+</body>
+</html>

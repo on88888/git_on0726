@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    namespace:类似类的包名，不能随便写，必须要对应的接口的全类名一致
+
+
+-->
+<mapper namespace="com.atguigu.mybatis.mappers.EmployeeMapper">
+    <!--
+        是什么语句，就用什么标签
+
+        id: 语句的唯一标识，同一个namespace，语句的id必须唯一，必须和接口中调用此sql的方法名一致！
+
+        resultType： 语句查询的记录要封装的JavaBean的类型
+
+        #{id}： #{xxxx} 固定语法，代表一个占位符，类似?
+
+                xxxx该怎么写：
+                        如果sql只有一个 ${}，xxxx随便写
+
+
+       查询最后是如何封装数据的
+    -->
+
+    <select id="getEmployeeById" resultType="com.atguigu.mybatis.bean.Employee1">
+
+         select * from tbl_employee where id = #{ fjheoi;ahjfao;ifha }
+  </select>
+
+
+    <!--
+      #{id}： #{xxxx} 固定语法，代表一个占位符，类似?
+
+                xxxx该怎么写：
+                        如果sql只有一个 ${}，xxxx随便写
+
+
+              void updateEmployee(Employee employee);
+                将employee.lastName 赋值给  last_name=#{}，
+                将employee.gender 赋值给  gender=#{}
+
+              赋值的规则：   xxxx 写什么，自动为xxxx提供一个get前缀，调用方法入参对象的 getXxxx()赋值给对应的占位符！
+
+               last_name=#{abc} ,xxxx=abc
+                  last_name=   employee.getAbc()
+
+
+               last_name=#{lastName},xxxx=lastName
+                    last_name=   employee.getLastName()
+
+
+              结论： 为哪一列赋值，传入方法入参对象的对应的属性名
+
+    -->
+    <update id="updateEmployee">
+
+        update tbl_employee
+            set last_name=#{lastName} , gender=#{gender} ,email = #{email}
+            where id=#{id}
+
+    </update>
+
+    <!--
+         void insertEmployee(Employee employee)
+    -->
+    <insert id="insertEmployee">
+
+            insert into tbl_employee(last_name,gender,email) values(#{lastName},#{gender},#{email})
+
+    </insert>
+
+    <delete id="deleteEmployeeById">
+
+            delete from tbl_employee where id=#{dfjaleifa}
+
+    </delete>
+
+    <!--
+            List<Employee> getAll();
+
+             resultType： 语句查询的记录要封装的JavaBean的类型
+    -->
+    <select id="getAll" resultType="com.atguigu.mybatis.bean.Employee">
+
+        select * from tbl_employee
+
+    </select>
+
+
+
+</mapper>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.10.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>org.atguigu</groupId>
+    <artifactId>gmall0726</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+
+    <modules>
+        <module>gmall_common</module>
+        <module>gmall_logger</module>
+        <module>SparkStreamingDemo</module>
+        <module>gmall_realtime</module>
+        <module>gmall_canalclient</module>
+    </modules>
+
+    <!--
+            依赖版本的管理，和模块的聚合操作
+    -->
+
+    <!--
+            定义一堆变量
+
+            <变量名>变量值<变量名>
+
+            可以使用 ${变量名} 来引用变量值
+
+            ${spark.version} = 3.0.0
+    -->
+    <properties>
+        <spark.version>3.0.0</spark.version>
+        <scala.version>2.12.10</scala.version>
+        <log4j.version>1.2.17</log4j.version>
+        <fastjson.version>1.2.47</fastjson.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <kafka.client.verson>2.4.1</kafka.client.verson>
+    </properties>
+
+
+    <!--
+            dependencies: 放的依赖会被子类无条件继承！
+
+                            子类无需声明，即可拥有！
+    -->
+    <dependencies>
+        <!-- 具体的日志实现 -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+    </dependencies>
+
+    <!--
+            dependencyManagement： 放的依赖不会被子类无条件继承！
+                            子类不声明，就没有！在声明时，可以不指定version，从父模块继承！
+
+                            如果声明了version，子类自己下载
+    -->
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <!-- 编写 streaming-->
+            <dependency>
+                <groupId>org.apache.spark</groupId>
+                <artifactId>spark-core_2.12</artifactId>
+                <version>${spark.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.spark</groupId>
+                <artifactId>spark-streaming_2.12</artifactId>
+                <version>${spark.version}</version>
+            </dependency>
+
+
+            <!-- 使用phoneix(sql) 写入Hbase   -->
+            <dependency>
+                <groupId>org.apache.spark</groupId>
+                <artifactId>spark-hive_2.12</artifactId>
+                <version>${spark.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.spark</groupId>
+                <artifactId>spark-sql_2.12</artifactId>
+                <version>${spark.version}</version>
+            </dependency>
+
+
+            <!--  spark streaming消费kafka的数据 -->
+            <dependency>
+                <groupId>org.apache.spark</groupId>
+                <artifactId>spark-streaming-kafka-0-10_2.12</artifactId>
+                <version>${spark.version}</version>
+            </dependency>
+
+            <!-- kafka的客户端api -->
+            <dependency>
+                <groupId>org.apache.kafka</groupId>
+                <artifactId>kafka-clients</artifactId>
+                <version>${kafka.client.verson}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+
+</project>
