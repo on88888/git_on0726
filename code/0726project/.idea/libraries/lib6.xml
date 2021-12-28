@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="lib6">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Exer/lib/hamcrest-core-1.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Exer/lib/mysql-connector-java-5.1.37-bin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Exer/lib/druid-1.1.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Exer/lib/commons-dbutils-1.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Exer/lib/junit-4.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Exer/lib/commons-io-2.7.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
